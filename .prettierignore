@@ -1,0 +1,19 @@
+# Ignorar archivos de configuración y metadatos
+.gitignore
+.prettierrc
+package.json
+README.md
+
+# Ignorar archivos de build y compilación
+node_modules/
+build/
+dist/
+
+# Ignorar archivos de documentación y comentarios
+docs/
+comments/
+
+# Ignorar archivos de prueba y pruebas unitarias
+tests/
+spec/
+coverage/

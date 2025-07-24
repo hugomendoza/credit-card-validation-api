@@ -1,0 +1,24 @@
+# Archivos de configuración y metadatos
+.idea/
+.vscode/
+.gitattributes
+
+# Archivos de build y compilación
+node_modules/
+build/
+dist/
+target/
+
+# Archivos de logs y errores
+logs/
+errors/
+
+# Archivos de sistema y temporales
+.DS_Store
+Thumbs.db
+.tmp/
+
+# Archivos de IDE y herramientas
+.eclipse/
+.netbeans/
+.gradle/
