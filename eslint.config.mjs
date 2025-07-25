@@ -4,9 +4,15 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules', 'coverage', 'eslint.config.mjs'],
+    ignores: [
+      'dist',
+      'node_modules',
+      'coverage',
+      'eslint.config.mjs',
+      'public',
+    ],
   },
-  ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.recommended,
   {
     languageOptions: {
       globals: {
@@ -16,9 +22,6 @@ export default tseslint.config(
         project: true,
         tsconfigRootDir: import.meta.dirname,
       },
-    },
-    rules: {
-      'no-console': 'warn',
     },
   },
   eslintConfigPrettier

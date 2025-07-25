@@ -8,6 +8,7 @@ README.md
 node_modules/
 build/
 dist/
+public/
 
 # Ignorar archivos de documentación y comentarios
 docs/
