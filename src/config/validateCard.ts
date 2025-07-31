@@ -14,3 +14,6 @@ export const validateCard = {
     return sum % 10 === 0;
   },
 };
+
+// * Visa 4242424242424242
+// * Mastercard 5454545454545454

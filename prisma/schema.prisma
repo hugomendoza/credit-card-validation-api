@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+model Token {
+  id             String          @id @default(uuid())
+  value          String          @unique
+  card_holder    String
+  brand          String
+  last_four      String
+  exp_month      String
+  exp_year       String
+  expires_at     DateTime?
+  createdAt      DateTime        @default(now())
+  paymentMethods PaymentMethod[]
+
+  @@map("tokens")
+}
+
+model Transaction {
+  id              String         @id @default(uuid())
+  amount_in_cents Int
+  currency        String
+  customer_email  String
+  reference       String          @unique
+  status          TransactionStatus @default(PENDING)
+  paymentMethod   PaymentMethod?
+  failure_code    String?
+  failure_message String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@map("transactions")
+}
+
+model PaymentMethod {
+  id           String      @id @default(uuid())
+  type         PaymentType @default(CARD)
+  installments Int
+
+  transactionId String      @unique
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+  tokenId       String
+  token         Token       @relation(fields: [tokenId], references: [id])
+
+  @@map("payment_method")
+}
+
+enum PaymentType {
+  CARD
+}
+
+enum TransactionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}

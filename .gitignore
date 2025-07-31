@@ -11,7 +11,6 @@ target/
 
 # Archivos de logs y errores
 logs/
-errors/
 
 # Archivos de sistema y temporales
 .DS_Store
@@ -24,3 +23,4 @@ Thumbs.db
 .gradle/
 
 .env
+/src/generated/prisma
