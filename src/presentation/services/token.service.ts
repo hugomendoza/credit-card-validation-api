@@ -18,8 +18,8 @@ export class TokenService {
   async createToken(createTokenDto: CreateTokenDto): Promise<TokenEntity> {
     try {
       const tokenValue = `tok_test_${randomBytes(16).toString('hex')}`;
-      const lastFour = createTokenDto.number.slice(-4);
-      const brand = this.getCardBrand(createTokenDto.number);
+      const lastFour = createTokenDto.value.slice(-4);
+      const brand = this.getCardBrand(createTokenDto.value);
 
       const tokenData = await prisma.token.create({
         data: {

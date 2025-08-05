@@ -2,7 +2,7 @@ import { validateCard } from '../../../config';
 
 export class CreateTokenDto {
   private constructor(
-    public readonly number: string,
+    public readonly value: string,
     public readonly cvc: string,
     public readonly exp_month: string,
     public readonly exp_year: string,
@@ -10,11 +10,11 @@ export class CreateTokenDto {
   ) {}
 
   static create(props: { [key: string]: string }): [string?, CreateTokenDto?] {
-    const { number, cvc, exp_month, exp_year, card_holder } = props;
-    if (!number) return ['El número de la tarjeta es obligatorio'];
-    if (number.length < 16)
+    const { value, cvc, exp_month, exp_year, card_holder } = props;
+    if (!value) return ['El número de la tarjeta es obligatorio'];
+    if (value.length < 16)
       return ['El número de la tarjeta debe tener al menos 16 caracteres'];
-    if (!validateCard.validate(number))
+    if (!validateCard.validate(value))
       return ['El número de la tarjeta es inválido'];
 
     if (!cvc) return ['El cvc es obligatorio'];
@@ -46,7 +46,7 @@ export class CreateTokenDto {
 
     return [
       undefined,
-      new CreateTokenDto(number, cvc, exp_month, exp_year, card_holder),
+      new CreateTokenDto(value, cvc, exp_month, exp_year, card_holder),
     ];
   }
 }

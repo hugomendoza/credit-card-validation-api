@@ -21,7 +21,6 @@ model Token {
   last_four      String
   exp_month      String
   exp_year       String
-  expires_at     DateTime?
   createdAt      DateTime        @default(now())
   paymentMethods PaymentMethod[]
 

@@ -10,8 +10,7 @@ export class TokenEntity {
     public last_four: string,
     public exp_month: string,
     public exp_year: string,
-    public createdAt: Date,
-    public expires_at: Date
+    public createdAt: Date
   ) {}
 
   static fromObject(object: { [key: string]: any }) {
@@ -24,7 +23,6 @@ export class TokenEntity {
       exp_month,
       exp_year,
       createdAt,
-      expires_at,
     } = object;
 
     if (!id) {
@@ -69,12 +67,6 @@ export class TokenEntity {
       );
     }
 
-    if (!expires_at) {
-      throw CustomError.badRequest(
-        'La fecha de expiración de la tarjeta es obligatorio'
-      );
-    }
-
     return new TokenEntity(
       id,
       value,
@@ -83,8 +75,7 @@ export class TokenEntity {
       last_four,
       exp_month,
       exp_year,
-      createdAt,
-      expires_at
+      createdAt
     );
   }
 }

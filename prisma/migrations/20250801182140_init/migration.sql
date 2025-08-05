@@ -13,7 +13,6 @@ CREATE TABLE "public"."tokens" (
     "last_four" TEXT NOT NULL,
     "exp_month" TEXT NOT NULL,
     "exp_year" TEXT NOT NULL,
-    "expires_at" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "tokens_pkey" PRIMARY KEY ("id")
