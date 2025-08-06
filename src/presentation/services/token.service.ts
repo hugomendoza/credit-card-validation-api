@@ -1,18 +1,18 @@
 import { randomBytes } from 'crypto';
 import { prisma } from '../../data/postgres-db';
 import { CreateTokenDto, CustomError, TokenEntity } from '../../domain';
+import { regularExps } from '../../config';
 
 export class TokenService {
   constructor() {}
 
   private getCardBrand(cardNumber: string): string {
-    if (/^4/.test(cardNumber)) {
-      return 'VISA';
+    for (const [brand, pattern] of Object.entries(regularExps.cards)) {
+      if (pattern.test(cardNumber)) {
+        return brand;
+      }
     }
-    if (/^5[1-5]/.test(cardNumber)) {
-      return 'MASTERCARD';
-    }
-    return 'UNKNOWN';
+    throw CustomError.badRequest('Solo se aceptan tarjetas VISA y Mastercard');
   }
 
   async createToken(createTokenDto: CreateTokenDto): Promise<TokenEntity> {
@@ -34,8 +34,11 @@ export class TokenService {
 
       return TokenEntity.fromObject(tokenData);
     } catch (error) {
+      if (error instanceof CustomError) {
+        throw error;
+      }
       console.error(error);
-      throw CustomError.internalServer(`${error}`);
+      throw CustomError.internalServer('Error interno del servidor');
     }
   }
 }

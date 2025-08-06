@@ -1,3 +1,4 @@
+import { updateTransactionStatus } from '../../config';
 import { prisma } from '../../data/postgres-db';
 import {
   CreateTransactionDto,
@@ -64,6 +65,8 @@ export class TransactionService {
           paymentMethod: { include: { token: true } },
         },
       });
+
+      await updateTransactionStatus(newTransaction.id);
 
       return TransactionEntity.fromObject(newTransaction);
     } catch (error) {

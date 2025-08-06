@@ -14,8 +14,7 @@ export class CreateTokenDto {
     if (!value) return ['El número de la tarjeta es obligatorio'];
     if (value.length < 16)
       return ['El número de la tarjeta debe tener al menos 16 caracteres'];
-    if (!validateCard.validate(value))
-      return ['El número de la tarjeta es inválido'];
+    if (!validateCard(value)) return ['El número de la tarjeta es inválido'];
 
     if (!cvc) return ['El cvc es obligatorio'];
     if (!/^\d{3,4}$/.test(cvc)) return ['El CVC debe tener 3 o 4 dígitos'];
