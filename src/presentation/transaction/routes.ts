@@ -9,6 +9,7 @@ export class TransactionRoutes {
     const controller = new TransactionController(transactionService);
 
     router.post('/', controller.createTransaction);
+    router.get('/:id', controller.getTransaction);
     return router;
   }
 }

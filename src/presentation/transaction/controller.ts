@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
-import { CreateTransactionDto, CustomError } from '../../domain';
+import {
+  CreateTransactionDto,
+  CustomError,
+  GetTransactionDto,
+} from '../../domain';
 import { TransactionService } from '../services/transaction.service';
 
 export class TransactionController {
@@ -21,6 +25,16 @@ export class TransactionController {
     this.transactionService
       .createTransaction(createTransactionDto!)
       .then((transaction) => res.status(201).json(transaction))
+      .catch((error) => this.handleError(error, res));
+  };
+
+  getTransaction = (req: Request, res: Response) => {
+    const [error, getTransactionDto] = GetTransactionDto.create(req.params);
+    if (error) return res.status(400).json({ error });
+
+    this.transactionService
+      .getTransactionById(getTransactionDto!.id)
+      .then((transaction) => res.status(200).json(transaction))
       .catch((error) => this.handleError(error, res));
   };
 }

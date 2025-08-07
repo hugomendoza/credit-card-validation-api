@@ -74,4 +74,23 @@ export class TransactionService {
       throw CustomError.internalServer(`${error}`);
     }
   }
+
+  async getTransactionById(id: string) {
+    const transaction = await prisma.transaction.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        amount_in_cents: true,
+        currency: true,
+        customer_email: true,
+        reference: true,
+        status: true,
+        failure_code: true,
+        failure_message: true,
+      },
+    });
+
+    if (!transaction) throw CustomError.notFound('La transacción no existe');
+    return transaction;
+  }
 }
