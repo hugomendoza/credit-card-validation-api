@@ -66,7 +66,7 @@ export class TransactionService {
         },
       });
 
-      await updateTransactionStatus(newTransaction.id);
+      updateTransactionStatus(newTransaction.id).catch(console.error);
 
       return TransactionEntity.fromObject(newTransaction);
     } catch (error) {

@@ -6,7 +6,7 @@ export async function updateTransactionStatus(transactioId: string) {
   await delay(10000);
   const random = Math.random();
   try {
-    if (random < 0.8) {
+    if (random < 0.5) {
       await prisma.transaction.update({
         where: { id: transactioId },
         data: { status: 'APPROVED', failure_code: null, failure_message: null },
