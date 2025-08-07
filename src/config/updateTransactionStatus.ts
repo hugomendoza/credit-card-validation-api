@@ -3,7 +3,7 @@ import { CustomError } from '../domain';
 import { delay } from './delay';
 
 export async function updateTransactionStatus(transactioId: string) {
-  await delay(10000);
+  await delay(8000);
   const random = Math.random();
   try {
     if (random < 0.5) {
