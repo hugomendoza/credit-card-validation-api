@@ -2,6 +2,9 @@ import express, { Router } from 'express';
 import http from 'http';
 import path from 'path';
 
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from '../config';
+
 interface Options {
   port: number;
   routes: Router;
@@ -24,6 +27,7 @@ export class Server {
     this.app.use(express.urlencoded({ extended: true }));
 
     this.app.use(express.static('public'));
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
     this.app.use(this.routes);
 
     this.app.get('/*splat', (req, res) => {
