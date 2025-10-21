@@ -62,7 +62,7 @@ export class TransactionService {
           },
         },
         include: {
-          paymentMethod: { include: { token: true } },
+          paymentMethod: true,
         },
       });
 
