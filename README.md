@@ -93,6 +93,11 @@ La documentación completa de los endpoints está disponible a través de Swagge
 - `POST /api/v1/transactions`: Crea una nueva transacción utilizando un token.
 - `GET /api/v1/transactions/:id`: Obtiene el estado de una transacción específica por su ID.
 
+### Números de tarjetas de crédito para hacer pruebas
+
+- `Visa: 4242424242424242`
+- `Mastercard: 5454545454545454`
+
 ## 📜 Scripts Disponibles
 
 - `npm run dev`: Inicia el servidor en modo de desarrollo con `nodemon`, que se reinicia automáticamente al detectar cambios.
